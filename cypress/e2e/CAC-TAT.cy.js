@@ -14,6 +14,9 @@ describe('Central de Atendimento ao Cliente TAT', () => {
   })
 
   it('preenche os campos obrigatórios e envia o formulário', () => {
+    // variable with long text
+    const longText = Cypress._.repeat('abcdefghijklmnopqrstuvwxyz', 10)
+
     // name and lastname
     cy.get('input[id="firstName"]').as('firstName') // input[id="firstName"] = #firstName
     .type('Eduarda')
@@ -30,8 +33,8 @@ describe('Central de Atendimento ao Cliente TAT', () => {
 
     // how can we help you?
     cy.get('textarea[id="open-text-area"]').as('feedback') // textarea[id="open-text-area"] = #open-text-area
-    .type('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel sapien eget nunc efficitur varius. Sed at ligula a enim efficitur efficitur. Donec ac odio id nisl convallis tincidunt. In hac habitasse platea dictumst. Curabitur ut felis sed enim efficitur efficitur. Donec ac odio id nisl convallis tincidunt. In hac habitasse platea dictumst. Curabitur ut felis sed enim efficitur efficitur.')
-    cy.get('@feedback').should('have.value', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel sapien eget nunc efficitur varius. Sed at ligula a enim efficitur efficitur. Donec ac odio id nisl convallis tincidunt. In hac habitasse platea dictumst. Curabitur ut felis sed enim efficitur efficitur. Donec ac odio id nisl convallis tincidunt. In hac habitasse platea dictumst. Curabitur ut felis sed enim efficitur efficitur.')
+    .type(longText, { delay: 0 }) // delay: 0 = without delay
+    cy.get('@feedback').should('have.value', longText)
     .should('be.visible')
 
     // button submit
