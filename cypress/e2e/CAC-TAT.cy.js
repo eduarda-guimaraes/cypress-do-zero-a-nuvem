@@ -81,4 +81,9 @@ describe('Central de Atendimento ao Cliente TAT', () => {
     .clear().should('have.value', '')
   })
 
+  it('exibe mensagem de erro ao submeter o formulário sem preencher os campos obrigatórios', () => {
+    cy.get('button[type="submit"]').should('be.visible').click()
+    cy.get('span.error').should('be.visible')
+  })
+
 } )
