@@ -50,8 +50,18 @@ describe('Central de Atendimento ao Cliente TAT', () => {
   })
 
   it('valor não-numérico deve continuar vazio no campo de telefone', () => {
-    cy.get('input[id="phone"]').as('phone').type('abcdefghijk', {delay: 400})
-    .should('have.value', '', {delay: 400})
+    cy.get('input[id="phone"]').as('phone').type('abcdefghijk', {delay: 200})
+    .should('have.value', '', {delay: 200})
+  })
+
+  it('exibe mensagem de erro quando o telefone se torna obrigatório mas não é preenchido antes do envio do formulário', () => {
+    cy.get('input[id="firstName"]').as('firstName').type('Eduarda')
+    cy.get('input[id="lastName"]').as('lastName').type('Guimarães')
+    cy.get('#open-text-area').type('teste')
+
+    cy.get('#phone-checkbox').check()
+    cy.get('button[type="submit"]').should('be.visible').click()
+    cy.get('span.error').as('errorMessage').should('be.visible')
   })
 
 } )
