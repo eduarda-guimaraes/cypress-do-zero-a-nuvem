@@ -38,14 +38,14 @@ describe('Central de Atendimento ao Cliente TAT', () => {
     .should('be.visible')
 
     // button submit
-    cy.get('button[type="submit"]').as('submitButton').should('be.visible').click()
+    cy.contains('button', 'Enviar').should('be.visible').click()
     cy.get('span[class="success"]').as('successMessage').should('be.visible')
 
   })
 
   it('exibe mensagem de erro ao submeter o formulário com um email com formatação inválida', () => {
     cy.get('input[id="email"]').type('emailerrado')
-    cy.get('button[type="submit"]').should('be.visible').click()
+    cy.contains('button', 'Enviar').should('be.visible').click()
     cy.get('span[class="error"]').as('errorMessage').should('be.visible')
   })
 
@@ -60,7 +60,7 @@ describe('Central de Atendimento ao Cliente TAT', () => {
     cy.get('#open-text-area').type('teste')
 
     cy.get('#phone-checkbox').check()
-    cy.get('button[type="submit"]').should('be.visible').click()
+    cy.contains('button', 'Enviar').should('be.visible').click()
     cy.get('span.error').as('errorMessage').should('be.visible')
   })
 
@@ -82,7 +82,7 @@ describe('Central de Atendimento ao Cliente TAT', () => {
   })
 
   it('exibe mensagem de erro ao submeter o formulário sem preencher os campos obrigatórios', () => {
-    cy.get('button[type="submit"]').should('be.visible').click()
+    cy.contains('button', 'Enviar').should('be.visible').click()
     cy.get('span.error').should('be.visible')
   })
 
