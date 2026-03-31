@@ -6,3 +6,12 @@ Cypress.Commands.add('fillMandatoryFieldsAndSubmit', () => {
 
     cy.get('button[type="submit"]').as('submitButton').should('be.visible').click()
 })
+
+Cypress.Commands.add('fillMandatoryFieldsAndSubmit2.0', (data) => {
+    cy.get('#firstName').type(data.firstName)
+    cy.get('#lastName').type(data.lastName)
+    cy.get('#email').type(data.email)
+    cy.get('#open-text-area').type(data.openTextArea)
+
+    cy.get('button[type="submit"]').as('submitButton').should('be.visible').click()
+})
