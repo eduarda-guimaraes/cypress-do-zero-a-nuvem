@@ -127,4 +127,17 @@ describe('Central de Atendimento ao Cliente TAT', () => {
     .check().should('be.checked')
   })
 
+  it('marca cada tipo de atendimento', () => {
+    cy.get('input[type="radio"]')
+    .check().should('be.checked')
+  })
+
+  it.only('marca cada tipo de atendimento usando o .each()', () => {
+    cy.get('input[type="radio"]')
+      .each(typeOfService => {
+        cy.wrap(typeOfService).check()
+        .should('be.checked')
+      })
+  })
+
 } )
